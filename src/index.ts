@@ -1,4 +1,4 @@
-function getPathElements(urlString: string): [string] {
+function getPathElements(urlString: string): string[] {
   const url = new URL(urlString);
   const [, ...elements] = url.pathname.split("/");
   return elements[elements.length - 1] === "" ? elements.slice(0, -1) : elements;
@@ -33,7 +33,7 @@ function handleError(error: unknown): Response {
 }
 
 export default {
-  async fetch(req: Request): Response {
+  async fetch(req: Request): Promise<Response> {
     try {
       const pathElements = getPathElements(req.url);
 
@@ -43,7 +43,7 @@ export default {
 
       const [eventsName, eventLogKey] = pathElements;
 
-      if (eventsName != "events") {
+      if (eventsName != "events" || typeof eventLogKey === "undefined") {
         return Response.json({ error: "Invalid URL" }, { status: 404, statusText: "Not Found" });
       }
 
