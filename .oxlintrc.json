@@ -12,6 +12,7 @@
   },
   "rules": {
     "eslint/func-style": ["error", "declaration"],
+    "eslint/id-length": ["error", { "checkGeneric": false }],
     "eslint/no-magic-numbers": "off",
     "eslint/no-ternary": "off",
     "oxc/no-async-await": "off"
